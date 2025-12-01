@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: trace-net-api
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -k uvicorn.workers.UvicornWorker api.predict:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: MODEL_URL
+        value: ""
